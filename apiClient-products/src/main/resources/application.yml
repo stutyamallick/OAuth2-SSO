@@ -1,0 +1,37 @@
+server:
+  port: 8081
+spring:
+  main:
+    web-application-type: REACTIVE
+    allow-bean-definition-overriding: true
+  cloud:
+    gateway:
+      #      default-filters:
+      #        -DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+      routes:
+        - id: bmw-products
+          uri: http://localhost:8091
+          predicates:
+            - Path=/api/**
+          filters:
+            - TokenRelay=
+        - id: web-app
+          uri: http://localhost:3000/
+          predicates:
+            - Path=/**
+  security:
+    oauth2:
+      client:
+        provider:
+          oauth2Server-bmw:
+            issuer-uri: http://localhost:8100
+        registration:
+          products-proxy-client:
+            client-id: productsClient
+            client-name: Login Via BMW Base
+            client-secret: productsSecret
+            provider: oauth2Server-bmw
+            client-authentication-method: client_secret_basic
+            redirect-uri: http://localhost:8081/login/oauth2/code/products-proxy-client
+            scope:
+              - openid

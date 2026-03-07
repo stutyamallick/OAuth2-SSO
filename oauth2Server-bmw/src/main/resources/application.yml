@@ -1,0 +1,22 @@
+server:
+  port: 8100
+
+spring:
+  application:
+    name: oauth2Server-bmw
+    main:
+      allow-bean-definition-overriding: true
+  datasource:
+    url: jdbc:h2:mem:netflixDB
+    driverClassName: org.h2.Driver
+    username: sa
+    password: password
+  h2:
+    console:
+      enabled: true
+
+logging:
+  level:
+    org:
+      hibernate:
+        stat: debug
