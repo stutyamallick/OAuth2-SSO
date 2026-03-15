@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     @GetMapping("/api/user-info")
-    public UserInfo userInfo(Authentication authentication){
+    public String userInfo(Authentication authentication){
 
-        return new UserInfo(authentication.getName());
+        return authentication != null ? authentication.getName() : "NOT_FOUND";
     }
 }

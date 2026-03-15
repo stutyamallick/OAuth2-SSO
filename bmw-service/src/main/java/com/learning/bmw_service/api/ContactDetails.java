@@ -9,6 +9,9 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserInfo {
-    private String username;
+public class ContactDetails {
+
+    private String dealerName;
+    private String address;
+    private String contactNumber;
 }

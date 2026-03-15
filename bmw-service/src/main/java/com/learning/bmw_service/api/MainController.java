@@ -7,16 +7,25 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class MainController {
 
-    @GetMapping("/api/nextSlot/{carId}")
-    public String getNextServiceSlot(@PathVariable String carId){
+    @GetMapping("/api/contactDetails/{optionType}")
+    public ContactDetails getNextServiceSlot(@PathVariable String optionType){
 
-        if(carId.equalsIgnoreCase("340i"))
-            return "Tomorrow 9AM onwards";
-        else if(carId.equalsIgnoreCase("540i"))
-            return "Day after tomorrow 12PM onwards";
-        else if(carId.equalsIgnoreCase("740i"))
-            return "Tomorrow 11AM onwards";
+        if(optionType.equalsIgnoreCase("service"))
+            return new ContactDetails(
+                    "Jatin Automobiles",
+                    "Shop 12, Eon Plaza, Bankmore, Dhanbad",
+                    "8411996111");
+        else if(optionType.equalsIgnoreCase("accessories"))
+            return new ContactDetails(
+                    "Car Decor",
+                    "Shop 16, Saraidhela Main Road, new SBI Branch, Dhanbad",
+                    "8411900000");
+        else if(optionType.equalsIgnoreCase("bodyShop"))
+            return new ContactDetails(
+                    "Pulkit Body works",
+                    "ISM Campus Dhanbad",
+                    "8411996222");
 
-        return "No Available slots right now!";
+        return null;
     }
 }
